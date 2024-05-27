@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cphflh7fuh7a"]
+
+[ext_resource type="Script" path="res://UI/playerInventory.gd" id="1_ddrlo"]
+[ext_resource type="PackedScene" uid="uid://b6gsqvnommnmg" path="res://UI/InventorySlot.tscn" id="2_wxqsn"]
+[ext_resource type="Resource" uid="uid://cxtdixco01apj" path="res://Data/Luna.tres" id="3_dpgkh"]
+[ext_resource type="Resource" uid="uid://dvijjr3xx7vvm" path="res://Data/Angel.tres" id="3_hxg85"]
+
+[node name="PlayerInventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ddrlo")
+maxInventorySize = 20
+inventorySlot = ExtResource("2_wxqsn")
+inventoryList = Array[Resource("res://Data/itemData.gd")]([ExtResource("3_hxg85"), ExtResource("3_dpgkh")])
+testItem = ExtResource("3_dpgkh")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 5

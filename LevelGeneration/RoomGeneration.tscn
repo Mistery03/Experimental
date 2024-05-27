@@ -1,0 +1,20 @@
+[gd_scene load_steps=7 format=3 uid="uid://sv3cagpy7axu"]
+
+[ext_resource type="Script" path="res://LevelGeneration/RoomGeneration.gd" id="1_47peo"]
+[ext_resource type="PackedScene" uid="uid://c20jir7upg23u" path="res://Rooms/StraightRoom.tscn" id="2_lejdo"]
+[ext_resource type="PackedScene" uid="uid://l2lheh7f04fq" path="res://Rooms/CornerUpRoom.tscn" id="3_qjfo6"]
+[ext_resource type="PackedScene" uid="uid://cwwxp15txlvsa" path="res://Rooms/ThreeJunctionRoom.tscn" id="4_w6ld7"]
+[ext_resource type="PackedScene" uid="uid://cg0bfq1gxofag" path="res://Rooms/FourJunctionRoom.tscn" id="5_cgkt3"]
+[ext_resource type="PackedScene" uid="uid://b50wpv41rnq3f" path="res://Rooms/DeadEndRoom.tscn" id="6_ab7o5"]
+
+[node name="RoomGeneration" type="Node2D"]
+script = ExtResource("1_47peo")
+straightRoom = ExtResource("2_lejdo")
+cornerUpRoom = ExtResource("3_qjfo6")
+threeJuncRoom = ExtResource("4_w6ld7")
+fourJuncRoom = ExtResource("5_cgkt3")
+deadEndRoom = ExtResource("6_ab7o5")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="RoomHolder" type="Node2D" parent="."]

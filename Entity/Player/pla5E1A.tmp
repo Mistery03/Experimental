@@ -1,0 +1,146 @@
+[gd_scene load_steps=15 format=3 uid="uid://dvycnbf1pqsjh"]
+
+[ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_5x7x0"]
+[ext_resource type="Texture2D" uid="uid://bwkj61nvii1oa" path="res://Assets/SpriteSheet/LunaSpriteSheet.png" id="1_8o738"]
+[ext_resource type="PackedScene" uid="uid://cfq38l7my804q" path="res://Entity/States/states.tscn" id="2_5jcx0"]
+[ext_resource type="Script" path="res://Entity/States/Idle.gd" id="3_4kj5h"]
+[ext_resource type="PackedScene" uid="uid://cady7edpuqxao" path="res://Components/input_movement_component.tscn" id="4_5rdrx"]
+[ext_resource type="Script" path="res://Entity/States/Move.gd" id="6_iqlxy"]
+[ext_resource type="Script" path="res://Entity/States/Fall.gd" id="7_t804k"]
+[ext_resource type="Script" path="res://Entity/States/Jump.gd" id="8_67lso"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q2un2"]
+radius = 9.0
+height = 24.0
+
+[sub_resource type="Animation" id="Animation_jwtax"]
+resource_name = "Idle"
+length = 0.7
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(2.37841, 1, 2.37841, 1),
+"update": 0,
+"values": [0, 1, 0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_88rsi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_s4n4g"]
+resource_name = "IdleSide"
+length = 1.2
+loop_mode = 1
+step = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(2.37841, 1, 1, 2.37841),
+"update": 0,
+"values": [2, 3, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_18akc"]
+resource_name = "Walk"
+length = 1.2
+loop_mode = 1
+step = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [2, 5, 2, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qui4r"]
+_data = {
+"Idle": SubResource("Animation_jwtax"),
+"IdleSide": SubResource("Animation_s4n4g"),
+"RESET": SubResource("Animation_88rsi"),
+"Walk": SubResource("Animation_18akc")
+}
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_5x7x0")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_8o738")
+hframes = 9
+vframes = 5
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_q2un2")
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_5jcx0")]
+starting_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall_state", "jump_state", "move_state")]
+script = ExtResource("3_4kj5h")
+fall_state = NodePath("../Fall")
+jump_state = NodePath("../Jump")
+move_state = NodePath("../Move")
+animation_name = "IdleSide"
+
+[node name="Move" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall_state", "idle_state", "jump_state")]
+script = ExtResource("6_iqlxy")
+fall_state = NodePath("../Fall")
+idle_state = NodePath("../Idle")
+jump_state = NodePath("../Jump")
+animation_name = "Walk"
+move_speed = 12000.0
+
+[node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "move_state")]
+script = ExtResource("7_t804k")
+idle_state = NodePath("../Idle")
+move_state = NodePath("../Move")
+
+[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall_state", "idle_state", "move_state")]
+script = ExtResource("8_67lso")
+fall_state = NodePath("../Fall")
+idle_state = NodePath("../Idle")
+move_state = NodePath("../Move")
+
+[node name="InputMovementComponent" parent="." instance=ExtResource("4_5rdrx")]
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qui4r")
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
+
+[editable path="StateMachine"]

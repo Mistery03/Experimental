@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cady7edpuqxao"]
+
+[ext_resource type="Script" path="res://Components/input_movement_component.gd" id="1_22ocj"]
+
+[node name="InputMovementComponent" type="Node"]
+script = ExtResource("1_22ocj")
+MoveInputs = {
+"Crouch": "Crouch",
+"Jump": "Jump",
+"MoveLeft": "MoveLeft",
+"MoveRight": "MoveRight"
+}

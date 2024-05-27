@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://dq2hkf1hev02s"]
+
+[ext_resource type="Script" path="res://UI/Inventory.gd" id="1_o58ql"]
+[ext_resource type="PackedScene" uid="uid://b6gsqvnommnmg" path="res://UI/InventorySlot.tscn" id="2_clfb8"]
+[ext_resource type="Resource" uid="uid://dvijjr3xx7vvm" path="res://Data/Angel.tres" id="3_u7ih5"]
+[ext_resource type="Resource" uid="uid://cxtdixco01apj" path="res://Data/Luna.tres" id="4_diu56"]
+
+[node name="Inventory" type="GridContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 5
+script = ExtResource("1_o58ql")
+maxInventorySize = 20
+inventorySlot = ExtResource("2_clfb8")
+inventoryList = Array[Resource("res://Data/itemData.gd")]([ExtResource("3_u7ih5"), ExtResource("4_diu56")])

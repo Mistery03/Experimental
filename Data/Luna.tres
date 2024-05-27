@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://cxtdixco01apj"]
+
+[ext_resource type="Script" path="res://Data/itemData.gd" id="1_thyrg"]
+[ext_resource type="Texture2D" uid="uid://bwkj61nvii1oa" path="res://Assets/SpriteSheet/LunaSpriteSheet.png" id="2_krsww"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_osskj"]
+atlas = ExtResource("2_krsww")
+region = Rect2(192, 32, 32, 32)
+
+[resource]
+script = ExtResource("1_thyrg")
+itemName = "Luna"
+texture = SubResource("AtlasTexture_osskj")
+amount = 0

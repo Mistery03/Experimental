@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dax7oibfblyge"]
+
+[ext_resource type="Script" path="res://Rooms/StartingRoom.gd" id="1_e7thw"]
+[ext_resource type="PackedScene" uid="uid://dcic64b672ojo" path="res://Rooms/tiledDeadEnd.tscn" id="2_b360b"]
+
+[node name="Starting" type="Node2D"]
+script = ExtResource("1_e7thw")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="TiledDeadEnd" parent="." instance=ExtResource("2_b360b")]
+isStartingRoom = true
+roomID = 128

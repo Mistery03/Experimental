@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxg7hncjq773h"]
+
+[ext_resource type="Script" path="res://UI/testInventory.gd" id="1_wf3uq"]
+[ext_resource type="Resource" uid="uid://dvijjr3xx7vvm" path="res://Data/Angel.tres" id="2_1h14f"]
+[ext_resource type="PackedScene" uid="uid://cphflh7fuh7a" path="res://UI/playerInventory.tscn" id="2_j2h8o"]
+[ext_resource type="Resource" uid="uid://cxtdixco01apj" path="res://Data/Luna.tres" id="3_t6c8d"]
+[ext_resource type="PackedScene" uid="uid://qenricqeam7v" path="res://UI/machine_slot.tscn" id="5_c4fp2"]
+
+[node name="Machine" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wf3uq")
+item = ExtResource("3_t6c8d")
+item2 = ExtResource("2_1h14f")
+
+[node name="PlayerInventory" parent="." node_paths=PackedStringArray("parentMachine") instance=ExtResource("2_j2h8o")]
+layout_mode = 1
+parentMachine = NodePath("..")
+
+[node name="MachineSlot" parent="." node_paths=PackedStringArray("player_inventory") instance=ExtResource("5_c4fp2")]
+layout_mode = 1
+offset_left = 989.0
+offset_top = 503.0
+offset_right = -46.0
+offset_bottom = -24.0
+player_inventory = NodePath("../PlayerInventory")
+item = ExtResource("2_1h14f")
+amount = 20

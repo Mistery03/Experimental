@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://l11dkboidmk"]
+
+[ext_resource type="Script" path="res://Entity/Command/CommandManager.gd" id="1_kwmrs"]
+
+[node name="CommandManager" type="Node"]
+script = ExtResource("1_kwmrs")

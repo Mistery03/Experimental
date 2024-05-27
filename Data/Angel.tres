@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dvijjr3xx7vvm"]
+
+[ext_resource type="Script" path="res://Data/itemData.gd" id="1_i65jb"]
+[ext_resource type="Texture2D" uid="uid://007xcslj4x7c" path="res://Assets/SpriteSheet/angelSheet.png" id="2_whmyt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qp1h"]
+atlas = ExtResource("2_whmyt")
+region = Rect2(0, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_i65jb")
+itemName = "Lily"
+texture = SubResource("AtlasTexture_3qp1h")
+amount = 0
